@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { Button } from './Button/Button';
 import { getImagesByQuery } from './Api/api';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {
@@ -9,13 +10,14 @@ export class App extends Component {
     query: '',
     images: [],
     isLoading: false,
-    isVisibleBtn: false,
     error: null,
   };
 
   onChangeInput = ({ target }) => this.setState({ query: target.value });
 
-  onSubmit = value => this.setState({ query: value, page: 1, images: [] });
+  onSubmit = value => {
+    if (value) this.setState({ query: value, page: 1, images: [] });
+  };
 
   componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
@@ -42,11 +44,14 @@ export class App extends Component {
   };
 
   render() {
-    const { isVisibleBtn } = this.state;
+    const { images, isLoading } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.onSubmit} />
-        {isVisibleBtn && <Button onClickBtn={this.onClickBtn} />}
+        {images.length !== 0 && <ImageGallery images={images} />}
+        {images.length !== 0 && !isLoading && (
+          <Button onClickBtn={this.onClickBtn} />
+        )}
       </>
     );
   }
