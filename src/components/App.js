@@ -59,17 +59,17 @@ export class App extends Component {
     this.setState({ imageURL: '' });
   };
 
-  escFunction = ({ key }) => {
+  escReading = ({ key }) => {
     if (key === 'Escape') {
       this.setState({ imageURL: '' });
     }
   };
 
   componentDidMount() {
-    document.addEventListener('keydown', this.escFunction);
+    document.addEventListener('keydown', this.escReading);
   }
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.escFunction);
+    document.removeEventListener('keydown', this.escReading);
   }
 
   render() {

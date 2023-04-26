@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 export function Modal({ imageURL, onClick }) {
@@ -10,3 +11,7 @@ export function Modal({ imageURL, onClick }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  imageURL: PropTypes.string.isRequired,
+};
